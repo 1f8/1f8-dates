@@ -13,7 +13,7 @@ test('create time as a number', () => {
 
   const value = new Date('2021-03-25T07:20:31.669Z')
   const expected = 1616656831
-  const output = program.dateToInt(value)
-  
+  const output = program.timeToInt(value)
+
   expect(output).toBe(expected)
 })
