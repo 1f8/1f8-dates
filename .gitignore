@@ -1,0 +1,9 @@
+node_modules
+build
+test
+src/**.js
+.idea/*
+.vscode/*
+
+coverage
+*.log

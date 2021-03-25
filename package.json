@@ -1,0 +1,30 @@
+{
+  "name": "1f8-dates",
+  "version": "0.0.0",
+  "description": "Date Utility",
+  "main": "build/main/index.js",
+  "scripts": {
+    "build": "run-s clean && run-p build:*",
+    "build:main": "tsc -p tsconfig.json",
+    "build:module": "tsc -p tsconfig.module.json",
+    "clean": "trash build test",
+    "lint": "eslint --ignore-path .gitignore --ext ts .",
+    "test": "jest"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/jest": "^26.0.21",
+    "@types/node": "^13.13.5",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-plugin-import": "^2.20.2",
+    "npm-run-all": "^4.1.5",
+    "trash-cli": "^3.0.0",
+    "ts-jest": "^26.5.4",
+    "tslint": "^6.1.2",
+    "typescript": "^3.8.3"
+  }
+}
