@@ -21,5 +21,12 @@ export const dateToInt = (dt: Date): number => {
 export const timeToInt = (dt: Date): number => {
 
   return parseInt(`${dt.getTime() / 1000}`, 10);
-  // return dt.getTime();
+}
+
+export const intToDate = (n:number):Date => {
+  return new Date(n)
+}
+
+export const intToTime = (n:number):Date => {
+  return new Date(n)
 }
