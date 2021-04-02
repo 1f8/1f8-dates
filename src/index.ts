@@ -1,21 +1,9 @@
 export const dateToInt = (dt: Date): number => {
-  const year = dt.getFullYear()
-  let month = dt.getMonth()
-  let date = dt.getDate()
-  let result = `${year}`;
+  const isoDate = dt.toISOString()
+  const dateString = isoDate.split("T")
+  const cleanedDate = dateString[0].split("-").join("")
 
-  console.log(`${year}${month}${date}`);
-  if (month < 9) {
-    result += `0${month + 1}`;
-  } else {
-    result += `${month + 1}`;
-  }
-  if (date < 10) {
-    result += `0${date}`;
-  } else {
-    result += `${date}`;
-  }
-  return parseInt(result, 10);
+  return parseInt(cleanedDate, 10);
 }
 
 export const timeToInt = (dt: Date): number => {
@@ -23,10 +11,14 @@ export const timeToInt = (dt: Date): number => {
   return parseInt(`${dt.getTime() / 1000}`, 10);
 }
 
-export const intToDate = (n:number):Date => {
-  return new Date(n)
+export const intToDate = (n: number): Date => {
+  const dates = `${n / 10000}`.split('.')
+  const year = dates[0];
+  const months = dates[1].substring(0, 2);
+  const date = dates[1].substring(2)
+  return new Date(`${year}-${months}-${date}`)
 }
 
-export const intToTime = (n:number):Date => {
-  return new Date(n)
+export const intToTime = (n: number): Date => {
+  return new Date(n * 1000)
 }

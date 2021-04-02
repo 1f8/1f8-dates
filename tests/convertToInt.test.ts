@@ -15,6 +15,7 @@ test('create date as number time-zone-indifference', () => {
   const expected = 20210325
   const output = program.dateToInt(value)
 
+
   expect(output).toBe(expected)
 
   const value2 = new Date('2021-03-24T23:58:00.000Z')
@@ -29,6 +30,6 @@ test('create time as a number', () => {
   const value = new Date('2021-03-25T07:20:31.669Z')
   const expected = 1616656831
   const output = program.timeToInt(value)
-  
+
   expect(output).toBe(expected)
 })
