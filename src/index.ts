@@ -1,3 +1,13 @@
+export enum TimeZone {
+  AustrlianEastern,
+  AustrlianCentral,
+  AustrlianWestern,
+  UsPacific,
+  UsEastern,
+  UsHawaii,
+  Japan,
+}
+
 export const dateToInt = (dt: Date): number => {
   const isoDate = dt.toISOString()
   const dateString = isoDate.split("T")
@@ -21,4 +31,12 @@ export const intToDate = (n: number): Date => {
 
 export const intToTime = (n: number): Date => {
   return new Date(n * 1000)
+}
+
+export const convertDateTz = (dt: Date, tz: TimeZone): Date => {
+  return new Date()
+}
+
+export const convertIntTz = (n: Number, h: Number, tz: TimeZone): Date => {
+  return new Date()
 }
