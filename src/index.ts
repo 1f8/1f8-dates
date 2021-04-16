@@ -118,6 +118,7 @@ export const dateToStringFormatJapan = (dt: Date): String => {
 
 export const getJapanYear = (dt: Date): [string, number] => {
   const japanYear = dt.toLocaleString("ja-JP-u-ca-japanese", { era: "long" });
+  console.log({japanYear})
   const reiwa = japanYear.substring(0, 2);
   const year = japanYear.substring(2, 3);
   return [reiwa, parseInt(year, 10)]
