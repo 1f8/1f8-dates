@@ -1,5 +1,10 @@
 import * as program from '../src/index'
 
+type JapaneseYear = {
+  nengou: string,
+  year: number,
+}
+
 test('Date to short Japan formatted time', () => {
 
   const value = new Date('2021-04-02T00:14:00.877Z')
@@ -11,11 +16,11 @@ test('Date to short Japan formatted time', () => {
 test('Get Japan Year', () => {
 
   const value = new Date('2021-04-02T00:14:38.877Z')
-  const expected = ['令和', 3]
+  const expected: JapaneseYear = { nengou: '令和', year: 3 }
   const output = program.getJapanYear(value)
 
-  expect(output[0]).toBe(expected[0])
-  expect(output[1]).toBe(expected[1])
+  expect(output.nengou).toBe(expected.nengou)
+  expect(output.year).toBe(expected.year)
 })
 
 test('Get formatted "ago" in Japanese', () => {

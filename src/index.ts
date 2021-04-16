@@ -13,6 +13,43 @@ export enum Language {
   JPN = 'JPN',
   ENG = 'ENG',
 }
+// ミリ秒をいれる。from toで間に入っていたら 
+type JapaneseYear = {
+  nengou: string,
+  year: number,
+}
+const JapaneseYears = [
+  {
+    year: '慶応',
+    from: new Date(1865, 5, 1),
+    to: new Date(1868, 10, 23),
+  },
+  {
+    year: '明治',
+    from: new Date(1868, 1, 25),
+    to: new Date(1912, 7, 29),
+  },
+  {
+    year: '大正',
+    from: new Date(1912, 7, 30),
+    to: new Date(1926, 12, 24),
+  },
+  {
+    year: '昭和',
+    from: new Date(1926, 12, 25),
+    to: new Date(1989, 1, 7),
+  },
+  {
+    year: '平成',
+    from: new Date(1989, 1, 8),
+    to: new Date(2019, 4, 30),
+  },
+  {
+    year: '令和',
+    from: new Date(2019, 5, 1),
+    to: new Date(),
+  },
+]
 const langOptions = {
   ENG: [' seconds ago', ' minutes ago', ' hours ago', ' days ago'],
   JPN: ['秒前', '分前', '時間前', '日前'],
@@ -116,12 +153,25 @@ export const dateToStringFormatJapan = (dt: Date): String => {
 
 }
 
-export const getJapanYear = (dt: Date): [string, number] => {
-  const japanYear = dt.toLocaleString("ja-JP-u-ca-japanese", { era: "long" });
-  console.log({japanYear})
-  const reiwa = japanYear.substring(0, 2);
-  const year = japanYear.substring(2, 3);
-  return [reiwa, parseInt(year, 10)]
+export const getJapanYear = (dt: Date): JapaneseYear => {
+  const userDateTime = dt.getTime();
+  const userYear = dt.getUTCFullYear();
+  let result;
+  let value;
+  for (let i = 0; i < JapaneseYears.length; i++) {
+    value = JapaneseYears[i];
+    console.log('Hi', value);
+    const fromValue = value.from.getTime();
+    const toValue = value.to.getTime();
+    const firstYear = value.from.getUTCFullYear();
+    if (userDateTime >= fromValue && userDateTime < toValue) {
+      result = {
+        nengou: value.year,
+        year: (userYear - firstYear) + 1,
+      }
+    }
+  }
+  return result
 }
 
 //現在時間より3分前の時間が入力されれば、３ minutes agoと出力する.
@@ -132,10 +182,10 @@ export const getFormatAgo = (n: number, lang: Language = Language.ENG): string =
   if (diff < 1000 * 60) {
     const pastSec = Math.floor((diff / 1000));
     return `${pastSec}${langOptions[lang][0]}`;
-  } else if (diff > (1000 * 60) && diff < (1000 * 60 * 60)) {
+  } else if (diff < (1000 * 60 * 60)) {
     const pastMin = Math.floor(diff / (1000 * 60));
     return `${pastMin}${langOptions[lang][1]}`
-  } else if (diff > (1000 * 60 * 60) && diff < (1000 * 60 * 60 * 24)) {
+  } else if (diff < (1000 * 60 * 60 * 24)) {
     const pastHours = Math.floor(diff / (1000 * 60 * 60));
     return `${pastHours}${langOptions[lang][2]}`
   } else if (diff >= (1000 * 60 * 60 * 24)) {

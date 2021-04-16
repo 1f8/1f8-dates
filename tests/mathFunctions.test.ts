@@ -22,7 +22,7 @@ test('Add months to int', () => {
 })
 
 test('Add years to int', () => {
-  expect(program.addMonthsInt(20200101, 1)).toBe(20210101)
-  expect(program.addMonthsInt(20200131, 1)).toBe(20210131)
-  expect(program.addMonthsInt(20200229, 1)).toBe(20210228)
+  expect(program.addYearsInt(20200101, 1)).toBe(20210101)
+  expect(program.addYearsInt(20200131, 1)).toBe(20210131)
+  expect(program.addYearsInt(20200229, 1)).toBe(20210228)
 })
